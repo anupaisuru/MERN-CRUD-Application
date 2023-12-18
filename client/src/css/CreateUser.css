@@ -1,0 +1,40 @@
+.CreateUser-main {
+  padding-top: 40px;
+}
+
+.head {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.form-section {
+  align-items: center;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+input {
+  display: block;
+  width: 450px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #e2e1e5;
+  background: #eeeded;
+  border: none;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+button.create-btn {
+  border-radius: 10px;
+  border: 1px solid #ffda3e;
+  background: #ffda3e;
+  width: 450px;
+  height: 50px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 520;
+}

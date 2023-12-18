@@ -1,0 +1,66 @@
+.UserList-main .head {
+  text-align: center;
+  padding-top: 20px;
+  font-weight: 500;
+}
+
+.UserList-main .s-p {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: end;
+  margin-right: 80px;
+  margin-top: 20px;
+}
+
+.UserList-main input {
+  width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #e2e1e5;
+  background: #eeeded;
+  border: none;
+  outline: none;
+}
+
+.UserList-main .pdf-btn {
+  height: 40px;
+  width: 50px;
+  background-color: #ffb800;
+  border: 1px solid #ffb800;
+  border-radius: 5px;
+  color: black;
+  font-weight: 600;
+}
+
+.user-list-table {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.upd-btn {
+  background-color: #0ea70a;
+  height: 30px;
+  width: 70px;
+  border: 1px solid #0ea70a;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+}
+
+.upd-btn a {
+  text-decoration: none;
+  color: white;
+}
+
+.dlt-btn {
+  background-color: #ee3636;
+  height: 30px;
+  width: 70px;
+  border: 1px solid #ee3636;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  margin-left: 10px;
+}

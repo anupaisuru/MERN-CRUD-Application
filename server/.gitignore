@@ -1,0 +1,5 @@
+# igoner node modules
+/node_modules
+
+# ignore env
+.env
