@@ -1,3 +1,5 @@
+This application is completely finished.
+
 This MERN (MongoDB, Express.js, React.js, Node.js) stack CRUD application is designed to perform basic
 operations on a user database. It includes functionality to add new users, delete users, update user details, and read user
 information. Additionally, the application features a search function to easily find specific users and a PDF generation
