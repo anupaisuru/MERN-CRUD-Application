@@ -2,71 +2,58 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "../css/UpdateUser.css";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function UpdateUser() {
   const navigate = useNavigate();
 
-  const location = useLocation();
-  const currentUrl = location.pathname.split("/").pop();
-
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    city: "",
-    mobile: "",
-  });
+  const { id } = useParams();
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
+  const [city, setcity] = useState("");
+  const [mobile, setmobile] = useState("");
 
   useEffect(() => {
-    async function fetchUsers() {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/users/getUser/${currentUrl}`);
-        console.log(response.data.user);
-        const data = response.data.user;
-        setFormData((prevState) => {
-          let newData = { ...prevState };
-          return {
-            ...newData,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            city: data.city,
-            mobile: data.mobile,
-          };
-        });
+        const result = await axios.get(`/api/users/getUser/${id}`);
+
+        const userData = result.data.user;
+        setfirstName(userData.firstName);
+        setlastName(userData.lastName);
+        setcity(userData.city);
+        setmobile(userData.mobile);
       } catch (error) {
-        console.log(error);
+        console.log("Error fetching user data:", error);
       }
-    }
-    fetchUsers();
-  }, []);
+    };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+    fetchData();
+  }, [id]);
 
-  const handleFormSubmit = async (e) => {
+  const updatedata = async (e) => {
     e.preventDefault();
-    try {
-      await axios.patch(`/api/users/updateUser/${currentUrl}`, formData);
 
-      setFormData((prevState) => {
-        let newData = { ...prevState };
-        return {
-          ...newData,
-          firstName: "",
-          lastName: "",
-          city: "",
-          mobile: "",
-        };
+    try {
+      const result = await axios.patch(`/api/users/updateUser/${id}`, {
+        firstName,
+        lastName,
+        city,
+        mobile,
       });
-      alert("Update Successfully");
-      navigate("/userList");
-    } catch (err) {
-      console.log(err);
+
+      //API returns a success message in the response
+      if (
+        result.data &&
+        result.data.message === "User details updated successfully"
+      ) {
+        alert("Updated Success");
+        navigate("/userList");
+      } else {
+        console.log("Unexpected API response:", result.data);
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
     }
   };
 
@@ -78,15 +65,15 @@ function UpdateUser() {
           <h2>Update User</h2>
         </div>
         <div className="form-section">
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={updatedata}>
             <div>
               <label>First Name : </label>
               <input
                 type="text"
                 name="firstName"
                 placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
+                value={firstName}
+                onChange={(e) => setfirstName(e.target.value)}
                 required
               ></input>
             </div>
@@ -96,8 +83,8 @@ function UpdateUser() {
                 type="text"
                 name="lastName"
                 placeholder="last Name"
-                value={formData.lastName}
-                onChange={handleChange}
+                value={lastName}
+                onChange={(e) => setlastName(e.target.value)}
                 required
               ></input>
             </div>
@@ -107,8 +94,8 @@ function UpdateUser() {
                 type="text"
                 name="city"
                 placeholder="City"
-                value={formData.city}
-                onChange={handleChange}
+                value={city}
+                onChange={(e) => setcity(e.target.value)}
                 required
               ></input>
             </div>
@@ -118,8 +105,8 @@ function UpdateUser() {
                 type="text"
                 name="mobile"
                 placeholder="Phone Number"
-                value={formData.mobile}
-                onChange={handleChange}
+                value={mobile}
+                onChange={(e) => setmobile(e.target.value)}
                 required
               ></input>
             </div>
